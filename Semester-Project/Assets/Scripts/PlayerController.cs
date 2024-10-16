@@ -2,16 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] GameObject player;
     [SerializeField] Transform swingHitBox;
     [SerializeField] Sprite leftSprite;
     [SerializeField] Sprite rightSprite;
     [SerializeField] float jumpForce = 2f;
     [SerializeField] float moveSpeed = 1f;
+    
     private bool isFacingRight = true;
+    private bool isGrounded = false;
 
     // Start is called before the first frame update
     void Start()
@@ -22,37 +24,60 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         //Movement
         if (Input.GetAxis("Horizontal") < 0)
         {
-            player.transform.position += Vector3.left * moveSpeed * Time.deltaTime;
-            player.GetComponent<SpriteRenderer>().sprite = rightSprite;
+            
+            transform.position += Vector3.left * moveSpeed * Time.deltaTime;
+            GetComponent<SpriteRenderer>().sprite = rightSprite;
             isFacingRight = true;
         }
         else if (Input.GetAxis("Horizontal") > 0)
         {
-            player.transform.position += Vector3.right * moveSpeed * Time.deltaTime;
-            player.GetComponent<SpriteRenderer>().sprite = leftSprite;
+            transform.position += Vector3.right * moveSpeed * Time.deltaTime;
+            GetComponent<SpriteRenderer>().sprite = leftSprite;
             isFacingRight = false;
         }
 
         if (Input.GetButtonDown("Jump"))
         {
-            player.GetComponent<Rigidbody2D>().AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
+            IsGrounded();
+            if (isGrounded)
+            {
+                GetComponent<Rigidbody2D>().AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
+                isGrounded = false;
+            }
         }
 
         //Position hitBox for hitting blocks
         if (isFacingRight)
         {
-            swingHitBox.position = player.transform.position + new Vector3(0.2f, 0, 0);
+            swingHitBox.position = transform.position + new Vector3(0.2f, 0, 0);
         }
         else
         {
-            swingHitBox.position = player.transform.position - new Vector3(0.2f, 0, 0);
+            swingHitBox.position = transform.position - new Vector3(0.2f, 0, 0);
         }
-        Debug.Log(player.transform.position + "   " + swingHitBox.position);
 
         //Add ability to hit and destroy blocks
 
+    }
+
+    void IsGrounded()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector3.up, 0.3f, LayerMask.GetMask("Blocks"));
+        
+        Debug.Log("Check for ground");
+        if (hit.collider != null)
+        {
+            Debug.Log("Raycast made contact");
+            isGrounded = true;
+            //if (hit.collider.gameObject.tag == "Block")
+            //{
+            //    Debug.Log("Block hit");
+            //    isGrounded = true;
+            //}
+        }
     }
 }

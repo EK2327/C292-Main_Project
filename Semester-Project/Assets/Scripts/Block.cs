@@ -15,4 +15,13 @@ public class Block : MonoBehaviour
     {
         
     }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "SwingArea" && Input.GetKeyDown(KeyCode.Z))
+        {
+            Destroy(gameObject);
+        }
+    }
+
 }
