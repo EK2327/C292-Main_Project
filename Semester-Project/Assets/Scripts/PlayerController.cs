@@ -56,10 +56,6 @@ public class PlayerController : MonoBehaviour
             swingHitBox.position = transform.position + new Vector3(0.125f, 0.03f, 0);
         }
 
-        //Debug Lines
-        Debug.DrawRay(transform.position, Vector3.up * 0.2f, Color.white);
-        Debug.DrawRay(transform.position, Vector3.down * 0.2f, Color.black);
-
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
