@@ -77,7 +77,6 @@ public class PlayerController : MonoBehaviour
     bool IsGrounded()
     {
         RaycastHit2D hit1 = Physics2D.Raycast(transform.position + new Vector3(0.15f, 0, 0), -Vector3.up, 0.2f, LayerMask.GetMask("Blocks"));
-
         RaycastHit2D hit2 = Physics2D.Raycast(transform.position - new Vector3(0.15f, 0, 0), -Vector3.up, 0.2f, LayerMask.GetMask("Blocks"));
 
         Debug.Log("Check for ground");

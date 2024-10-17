@@ -19,6 +19,6 @@ public class GameManager : MonoBehaviour
 
     void EndGame()
     {
-
+        Debug.Log("Player died and game is over");
     }
 }
