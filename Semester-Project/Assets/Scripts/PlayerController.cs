@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using static UnityEngine.EventSystems.EventTrigger;
 
 public class PlayerController : MonoBehaviour
@@ -13,12 +14,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float moveSpeed = 1f;
     
     private bool isFacingRight = true;
-    private bool isGrounded = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -40,14 +40,10 @@ public class PlayerController : MonoBehaviour
             isFacingRight = false;
         }
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && IsGrounded())
         {
-            IsGrounded();
-            if (isGrounded)
-            {
                 GetComponent<Rigidbody2D>().AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
-                isGrounded = false;
-            }
+            
         }
 
         //Position hitBox for hitting blocks
@@ -60,24 +56,39 @@ public class PlayerController : MonoBehaviour
             swingHitBox.position = transform.position - new Vector3(0.2f, 0, 0);
         }
 
-        //Add ability to hit and destroy blocks
+        //Debug Lines
+        Debug.DrawRay(transform.position, Vector3.up * 0.2f, Color.white);
+        Debug.DrawRay(transform.position, Vector3.down * 0.2f, Color.black);
 
     }
 
-    void IsGrounded()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector3.up, 0.3f, LayerMask.GetMask("Blocks"));
-        
+        Debug.Log("PLayer touched something");
+        RaycastHit2D hit1 = Physics2D.Raycast(transform.position + new Vector3(0.15f, 0, 0), Vector3.up, 0.2f, LayerMask.GetMask("Blocks"));
+        RaycastHit2D hit2 = Physics2D.Raycast(transform.position - new Vector3(0.15f, 0, 0), Vector3.up, 0.2f, LayerMask.GetMask("Blocks"));
+        if (hit1.collider != null && IsGrounded())
+        {
+            Debug.Log("Player crushed");
+            MyEvents.PlayerDied.Invoke();
+        }
+    }
+
+    bool IsGrounded()
+    {
+        RaycastHit2D hit1 = Physics2D.Raycast(transform.position + new Vector3(0.15f, 0, 0), -Vector3.up, 0.2f, LayerMask.GetMask("Blocks"));
+
+        RaycastHit2D hit2 = Physics2D.Raycast(transform.position - new Vector3(0.15f, 0, 0), -Vector3.up, 0.2f, LayerMask.GetMask("Blocks"));
+
         Debug.Log("Check for ground");
-        if (hit.collider != null)
+        if (hit1.collider != null || hit2.collider != null)
         {
             Debug.Log("Raycast made contact");
-            isGrounded = true;
-            //if (hit.collider.gameObject.tag == "Block")
-            //{
-            //    Debug.Log("Block hit");
-            //    isGrounded = true;
-            //}
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }
