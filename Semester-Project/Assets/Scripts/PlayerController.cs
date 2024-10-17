@@ -49,11 +49,11 @@ public class PlayerController : MonoBehaviour
         //Position hitBox for hitting blocks
         if (isFacingRight)
         {
-            swingHitBox.position = transform.position + new Vector3(0.2f, 0, 0);
+            swingHitBox.position = transform.position - new Vector3(0.125f, -0.03f, 0);
         }
         else
         {
-            swingHitBox.position = transform.position - new Vector3(0.2f, 0, 0);
+            swingHitBox.position = transform.position + new Vector3(0.125f, 0.03f, 0);
         }
 
         //Debug Lines
@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("PLayer touched something");
+        //Debug.Log("Player touched something");
         RaycastHit2D hit1 = Physics2D.Raycast(transform.position + new Vector3(0.15f, 0, 0), Vector3.up, 0.2f, LayerMask.GetMask("Blocks"));
         RaycastHit2D hit2 = Physics2D.Raycast(transform.position - new Vector3(0.15f, 0, 0), Vector3.up, 0.2f, LayerMask.GetMask("Blocks"));
         if (hit1.collider != null && IsGrounded())
@@ -79,10 +79,10 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D hit1 = Physics2D.Raycast(transform.position + new Vector3(0.15f, 0, 0), -Vector3.up, 0.2f, LayerMask.GetMask("Blocks"));
         RaycastHit2D hit2 = Physics2D.Raycast(transform.position - new Vector3(0.15f, 0, 0), -Vector3.up, 0.2f, LayerMask.GetMask("Blocks"));
 
-        Debug.Log("Check for ground");
+        //Debug.Log("Check for ground");
         if (hit1.collider != null || hit2.collider != null)
         {
-            Debug.Log("Raycast made contact");
+            //Debug.Log("Raycast made contact");
             return true;
         }
         else

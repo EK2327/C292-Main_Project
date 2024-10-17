@@ -13,13 +13,15 @@ public class Block : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "SwingArea" && Input.GetKeyDown(KeyCode.Z))
+        //Debug.Log("Made contact with block");
+        if (collision.gameObject.tag == "SwingArea" && Input.GetButton("Fire1"))
         {
+            //Debug.Log("Block broken");
             Destroy(gameObject);
         }
     }
