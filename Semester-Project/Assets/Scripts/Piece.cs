@@ -19,7 +19,6 @@ public class Piece : MonoBehaviour
         {
             transform.position += Vector3.down * fallSpeed * Time.deltaTime;
         }
-        Debug.Log(isFalling);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

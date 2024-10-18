@@ -6,7 +6,7 @@ public class BlockSpawner : MonoBehaviour
 {
     private float yPos;
     private float timer = 0;
-    float gameSpeed = 1;
+    float gameSpeed;
 
     //Pipe prefabs
     [SerializeField] GameObject pipe1prefab;
@@ -38,9 +38,11 @@ public class BlockSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        gameSpeed = GameManager.instance.getGameSpeed();
         timer += Time.deltaTime;
         if (timer > 2 / gameSpeed)
         {
+            //Debug.Log("Spawning a block");
             yPos = Camera.main.ViewportToWorldPoint(new Vector3(0, 1.25f, 0)).y;
             SpawnBlock(Random.Range(0, 9));
             timer = 0;
