@@ -34,8 +34,8 @@ Transform:
   m_Children:
   - {fileID: 7860303465036963105}
   - {fileID: 8587088472760168958}
-  - {fileID: 3646890948532452146}
   - {fileID: 1358870902963840081}
+  - {fileID: 3646890948532452146}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &3462701047119973534
@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a074258ce50f8d488bb66e2813ed7ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallSpeed: 0.5
+  fallSpeed: 1.2
 --- !u!61 &8453110934702295248
 BoxCollider2D:
   m_ObjectHideFlags: 0

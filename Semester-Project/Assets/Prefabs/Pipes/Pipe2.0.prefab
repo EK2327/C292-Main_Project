@@ -204,8 +204,8 @@ Transform:
   m_Children:
   - {fileID: 2250195190037775469}
   - {fileID: 3515701011682068999}
-  - {fileID: 904974802592625871}
   - {fileID: 3828203082504414549}
+  - {fileID: 904974802592625871}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &198589307011818712
@@ -265,7 +265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a074258ce50f8d488bb66e2813ed7ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallSpeed: 0.5
+  fallSpeed: 1.2
 --- !u!1 &2456552134031806197
 GameObject:
   m_ObjectHideFlags: 0
