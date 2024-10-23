@@ -57,7 +57,6 @@ public class PlayerController : MonoBehaviour
             swingHitBox.position = transform.position + new Vector3(0.125f, 0.03f, 0);
         }
 
-        //cameraPos.position = new Vector3(cameraPos.position.x, transform.position.y + 3, cameraPos.position.z);
 
     }
 
@@ -66,7 +65,6 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.gameObject.tag == "Water")
         {
-            Debug.Log("Player Died");
             MyEvents.PlayerDied.Invoke();
         }
     }

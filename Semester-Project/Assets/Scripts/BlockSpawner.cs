@@ -52,7 +52,7 @@ public class BlockSpawner : MonoBehaviour
         }
         
         //Check if enough time has passed to spawn block - less time required for higher speeds
-        if (timer > 2 / gameSpeed)
+        if (timer > 1 / gameSpeed)
         {
             //Debug.Log("Spawning a block");
             yPos = Camera.main.ViewportToWorldPoint(new Vector3(0, 1.25f, 0)).y;
@@ -71,7 +71,7 @@ public class BlockSpawner : MonoBehaviour
     void SpawnBlock(int placement)
     {
         int spawnPrefab;
-        //Left most column - can only spawn block with width of 1
+        //Left most column can only spawn block with width of 1
         if (placement == 9)
         {
             spawnPrefab = 0;
@@ -165,7 +165,7 @@ public class BlockSpawner : MonoBehaviour
 
     private void SetCanSpawn()
     {
-        Debug.Log("Block can spawn again");
+        //Debug.Log("Block can spawn again");
         canSpawn = true;
     }
 
