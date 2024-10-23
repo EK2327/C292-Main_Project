@@ -8,6 +8,7 @@ using static UnityEngine.EventSystems.EventTrigger;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] Transform swingHitBox;
+    [SerializeField] Transform cameraPos;
     [SerializeField] Sprite leftSprite;
     [SerializeField] Sprite rightSprite;
     [SerializeField] float jumpForce = 2f;
@@ -56,29 +57,39 @@ public class PlayerController : MonoBehaviour
             swingHitBox.position = transform.position + new Vector3(0.125f, 0.03f, 0);
         }
 
+        //cameraPos.position = new Vector3(cameraPos.position.x, transform.position.y + 3, cameraPos.position.z);
+
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    //Check if player is in Water
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        //Debug.Log("Player touched something");
-        RaycastHit2D hit1 = Physics2D.Raycast(transform.position + new Vector3(0.15f, 0, 0), Vector3.up, 0.2f, LayerMask.GetMask("Blocks"));
-        RaycastHit2D hit2 = Physics2D.Raycast(transform.position - new Vector3(0.15f, 0, 0), Vector3.up, 0.2f, LayerMask.GetMask("Blocks"));
-        if (hit1.collider != null && IsGrounded())
+        if(collision.gameObject.tag == "Water")
         {
-            Debug.Log("Player crushed");
+            Debug.Log("Player Died");
             MyEvents.PlayerDied.Invoke();
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //Check if collider is directly above player
+        RaycastHit2D hit1 = Physics2D.Raycast(transform.position + new Vector3(0.15f, 0, 0), Vector3.up, 0.2f, LayerMask.GetMask("Blocks"));
+        RaycastHit2D hit2 = Physics2D.Raycast(transform.position - new Vector3(0.15f, 0, 0), Vector3.up, 0.2f, LayerMask.GetMask("Blocks"));
+        if (hit1.collider != null && IsGrounded())
+        {
+            MyEvents.PlayerDied.Invoke();
+        }
+    }
+
+    //Return if the player is touching the top of a block
     bool IsGrounded()
     {
         RaycastHit2D hit1 = Physics2D.Raycast(transform.position + new Vector3(0.15f, 0, 0), -Vector3.up, 0.2f, LayerMask.GetMask("Blocks"));
         RaycastHit2D hit2 = Physics2D.Raycast(transform.position - new Vector3(0.15f, 0, 0), -Vector3.up, 0.2f, LayerMask.GetMask("Blocks"));
 
-        //Debug.Log("Check for ground");
         if (hit1.collider != null || hit2.collider != null)
         {
-            //Debug.Log("Raycast made contact");
             return true;
         }
         else
