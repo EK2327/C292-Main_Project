@@ -23,7 +23,6 @@ public class Block : MonoBehaviour
             timer += Time.deltaTime;
             if (timer > 0.5f)
             {
-                Debug.Log("A new block can be broken");
                 canBreak = true;
                 timer = 0f;
             }
@@ -44,7 +43,6 @@ public class Block : MonoBehaviour
     //Called when a pipe block has been broken
     void PipeBroken()
     {
-        Debug.Log("A block was broken");
         canBreak = false;
     }
 
@@ -53,6 +51,7 @@ public class Block : MonoBehaviour
     {
         Debug.Log("Block has landed");
         hasLanded = true;
+        MyEvents.BlockDoneFalling.RemoveListener(PipeLanded);
     }
 
 }

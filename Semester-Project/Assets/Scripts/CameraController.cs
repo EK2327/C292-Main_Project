@@ -10,6 +10,9 @@ public class CameraController : MonoBehaviour
     float xPos;
     float yPos;
     float zPos;
+
+    float timePassed;
+    bool shouldReposition = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,9 +24,25 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (shouldReposition)
+        {
+            RepositionCamera();
+        }
+        else
+        {
+            timePassed += Time.deltaTime;
+            if (timePassed > 1)
+            {
+                shouldReposition = true;
+            }
+        }
+    }
+
+    void RepositionCamera()
+    {
         yPos = playerPos.position.y + 3;
         //Make sure y position is above water
-        if(yPos < (waterPos.position.y + 5))
+        if (yPos < (waterPos.position.y + 5))
         {
             yPos = waterPos.position.y + 5;
         }
