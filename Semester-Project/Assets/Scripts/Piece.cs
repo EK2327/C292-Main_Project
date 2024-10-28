@@ -5,7 +5,7 @@ using UnityEngine;
 public class Piece : MonoBehaviour
 {
     private bool isFalling = true;
-    [SerializeField] float fallSpeed = 2.5f;
+    [SerializeField] float fallSpeed = 3f;
     private int gameSpeed;
     // Start is called before the first frame update
     void Start()

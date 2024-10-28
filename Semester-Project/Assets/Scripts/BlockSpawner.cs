@@ -5,7 +5,6 @@ using UnityEngine;
 public class BlockSpawner : MonoBehaviour
 {
     private float yPos;
-    private float timer = 0;
     float gameSpeed;
     private bool canSpawn = true;
 
@@ -34,7 +33,7 @@ public class BlockSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        yPos = Camera.main.ViewportToWorldPoint(new Vector3(0, 1.25f, 0)).y;
+        yPos = GameManager.instance.getMaxHeight() + 10;
         MyEvents.BlockDoneFalling.AddListener(SetCanSpawn);
     }
 
@@ -47,17 +46,9 @@ public class BlockSpawner : MonoBehaviour
         //Check if the last block has landed and a new block can spawn
         if (canSpawn)
         {
-            //Add time to timer for spawning blocks
-            timer += Time.deltaTime;
-        }
-        
-        //Check if enough time has passed to spawn block - less time required for higher speeds
-        if (timer > 1 / gameSpeed)
-        {
             //Debug.Log("Spawning a block");
-            yPos = Camera.main.ViewportToWorldPoint(new Vector3(0, 1.25f, 0)).y;
+            yPos = GameManager.instance.getMaxHeight() + 10;
             SpawnBlock(Random.Range(0, 9));
-            timer = 0;
         }
         
     }

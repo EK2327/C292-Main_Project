@@ -7,6 +7,7 @@ public class Block : MonoBehaviour
 {
     private bool canBreak = true;
     private bool hasLanded = false;
+    private bool waterlogged = false;
     private float timer = 0f;
     // Start is called before the first frame update
     void Start()
@@ -52,6 +53,18 @@ public class Block : MonoBehaviour
         Debug.Log("Block has landed");
         hasLanded = true;
         MyEvents.BlockDoneFalling.RemoveListener(PipeLanded);
+    }
+
+    //Allows the block to be destroyed when it touches the second water hitbox
+    public void Waterlog()
+    {
+        waterlogged = true;
+    }
+
+    //Check if block is waterlogged
+    public bool IsWaterlogged()
+    {
+        return waterlogged;
     }
 
 }
