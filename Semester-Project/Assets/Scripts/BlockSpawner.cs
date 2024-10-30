@@ -46,7 +46,7 @@ public class BlockSpawner : MonoBehaviour
         //Check if the last block has landed and a new block can spawn
         if (canSpawn)
         {
-            //Debug.Log("Spawning a block");
+            Debug.Log("Spawning a block");
             yPos = GameManager.instance.getMaxHeight() + 10;
             SpawnBlock(Random.Range(0, 9));
         }

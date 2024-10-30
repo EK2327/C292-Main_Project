@@ -50,7 +50,7 @@ public class Block : MonoBehaviour
     //Called when the pipe has landed
     void PipeLanded()
     {
-        Debug.Log("Block has landed");
+        //Debug.Log("Block has landed");
         hasLanded = true;
         MyEvents.BlockDoneFalling.RemoveListener(PipeLanded);
     }

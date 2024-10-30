@@ -18,11 +18,12 @@ public class Piece : MonoBehaviour
     {
         //Get game speed
         gameSpeed = GameManager.instance.getGameSpeed();
+        float calcFallSpeed = (float)(fallSpeed + ((fallSpeed * 0.5) * (gameSpeed - 1)));
         //Check if pipe is falling
         if (isFalling)
         {
             //Move pipe down at proper speed, taking into account game speed
-            transform.position += Vector3.down * fallSpeed * gameSpeed * Time.deltaTime;
+            transform.position += Vector3.down * calcFallSpeed * Time.deltaTime;
         }
     }
 
@@ -31,6 +32,7 @@ public class Piece : MonoBehaviour
         //If this pipe collided with another pipe, it should stop falling
         if (collision.gameObject.tag == "Block" && !(collision.transform.IsChildOf(transform)))
         {
+            Debug.Log("Block has landed");
             isFalling = false;
             MyEvents.BlockDoneFalling.Invoke();
         }

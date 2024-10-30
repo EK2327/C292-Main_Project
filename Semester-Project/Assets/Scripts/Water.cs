@@ -6,8 +6,7 @@ public class Water : MonoBehaviour
 {
     private int gameSpeed;
     private float maxHeight;
-    private float riseSpeed;
-    [SerializeField] float riseMult;
+    [SerializeField] float riseSpeed;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,13 +17,13 @@ public class Water : MonoBehaviour
     void Update()
     {
         gameSpeed = GameManager.instance.getGameSpeed();
+        float calcRiseSpeed = (float)(riseSpeed + ( (riseSpeed * 0.5) * (gameSpeed - 1) ) );
         maxHeight = GameManager.instance.getMaxHeight();
         if (maxHeight > (transform.position.y + 5))
         {
-            gameSpeed *= 2;
+            calcRiseSpeed *= 2;
         }
-        riseSpeed = gameSpeed * riseMult;
-        transform.position += (Vector3.up * riseSpeed) * Time.deltaTime;
+        transform.position += (Vector3.up * calcRiseSpeed) * Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1006388738063350220}
   m_Layer: 3
   m_Name: Pipe3.3
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 8518670390104004632}
   m_Layer: 3
   m_Name: Pipe3.0
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -357,7 +357,7 @@ GameObject:
   - component: {fileID: 8270023004294642422}
   m_Layer: 3
   m_Name: Pipe3.2
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -563,7 +563,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fallSpeed: 1.9
-  speedMult: 1
 --- !u!61 &2288440675145514104
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -624,7 +623,7 @@ GameObject:
   - component: {fileID: 5030847838865476512}
   m_Layer: 3
   m_Name: Pipe3.1
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
