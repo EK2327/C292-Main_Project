@@ -46,7 +46,6 @@ public class BlockSpawner : MonoBehaviour
         //Check if the last block has landed and a new block can spawn
         if (canSpawn)
         {
-            Debug.Log("Spawning a block");
             yPos = GameManager.instance.getMaxHeight() + 10;
             SpawnBlock(Random.Range(0, 9));
         }
@@ -95,79 +94,60 @@ public class BlockSpawner : MonoBehaviour
         {
             case 0:
                 Instantiate(pipe14prefab, spawnPoint, Quaternion.identity);
-                Debug.Log("pipe5.0 spawned");
                 break;
             case 1:
                 Instantiate(pipe1prefab, spawnPoint, Quaternion.identity);
-                Debug.Log("pipe1.0 spawned");
                 break;
             case 2:
                 Instantiate(pipe3prefab, spawnPoint, Quaternion.identity);
-                Debug.Log("pipe1.2 spawned");
                 break;
             case 3:
                 Instantiate(pipe5prefab, spawnPoint, Quaternion.identity);
-                Debug.Log("pipe2.0 spawned");
                 break;
             case 4:
                 Instantiate(pipe7prefab, spawnPoint, Quaternion.identity);
-                Debug.Log("pipe2.2 spawned");
                 break;
             case 5:
                 Instantiate(pipe10prefab, spawnPoint, Quaternion.identity);
-                Debug.Log("pipe3.1 spawned");
                 break;
             case 6:
                 Instantiate(pipe12prefab, spawnPoint, Quaternion.identity);
-                Debug.Log("pipe3.3 spawned");
                 break;
             case 7:
                 Instantiate(pipe13prefab, spawnPoint, Quaternion.identity);
-                Debug.Log("pipe4.0 spawned");
                 break;
             case 8:
                 Instantiate(pipe17prefab, spawnPoint, Quaternion.identity);
-                Debug.Log("pipe6.1 spawned");
                 break;
             case 9:
                 Instantiate(pipe19prefab, spawnPoint, Quaternion.identity);
-                Debug.Log("pipe7.1 spawned");
                 break;
             case 10:
                 Instantiate(pipe2prefab, spawnPoint, Quaternion.identity);
-                Debug.Log("pipe1.1 spawned");
                 break;
             case 11:
                 Instantiate(pipe4prefab, spawnPoint, Quaternion.identity);
-                Debug.Log("pipe1.4 spawned");
                 break;
             case 12:
                 Instantiate(pipe6prefab, spawnPoint, Quaternion.identity);
-                Debug.Log("pipe2.1 spawned");
                 break;
             case 13:
                 Instantiate(pipe8prefab, spawnPoint, Quaternion.identity);
-                Debug.Log("pipe2.3 spawned");
                 break;
             case 14:
                 Instantiate(pipe9prefab, spawnPoint, Quaternion.identity);
-                Debug.Log("pipe3.0 spawned");
                 break;
             case 15:
                 Instantiate(pipe11prefab, spawnPoint, Quaternion.identity);
-                Debug.Log("pipe3.2 spawned");
                 break;
             case 16:
                 Instantiate(pipe16prefab, spawnPoint, Quaternion.identity);
-                Debug.Log("pipe6.0 spawned");
                 break;
             case 17:
                 Instantiate(pipe18prefab, spawnPoint, Quaternion.identity);
-                Debug.Log("pipe7.0 spawned");
                 break;
             case 18:
                 Instantiate(pipe15prefab, spawnPoint, Quaternion.identity);
-                Debug.Log("pipe5.1 spawned");
                 break;
         }
         canSpawn = false;

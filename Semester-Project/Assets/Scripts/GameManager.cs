@@ -48,28 +48,21 @@ public class GameManager : MonoBehaviour
             AddTempSpeed();
             tempSpeedTimer = 0;
         }
-        //Debug.DrawRay(new Vector3(-2.9f, maxHeight + 1.9f, 0f), Vector3.right * 6f, Color.white);
-        //Debug.DrawRay(new Vector3(-2.9f, maxHeight + 1.4f, 0f), Vector3.right * 6f, Color.white);
-        //Debug.DrawRay(new Vector3(-2.9f, maxHeight + 0.9f, 0f), Vector3.right * 6f, Color.white);
-        //Debug.DrawRay(new Vector3(-2.9f, maxHeight + 0.4f, 0f), Vector3.right * 6f, Color.white);
     }
 
     void EndGame()
     {
-        Debug.Log("Player died and game is over");
         SceneManager.LoadScene("Scene1");
     }
 
     void AddSpeed()
     {
         permSpeed++;
-        Debug.Log("Permanent Speed increased to " + permSpeed);
     }
 
     void AddTempSpeed()
     {
         tempSpeed++;
-        Debug.Log("Temporary speed increased");
     }
 
     public int getGameSpeed()

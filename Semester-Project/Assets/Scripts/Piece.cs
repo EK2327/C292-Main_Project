@@ -32,7 +32,6 @@ public class Piece : MonoBehaviour
         //If this pipe collided with another pipe, it should stop falling
         if (collision.gameObject.tag == "Block" && !(collision.transform.IsChildOf(transform)))
         {
-            Debug.Log("Block has landed");
             isFalling = false;
             MyEvents.BlockDoneFalling.Invoke();
         }
