@@ -7,9 +7,13 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    [SerializeField] Transform playerPos;
 
-    private int gameSpeed = 1;
+    private int permSpeed = 1;
     private float maxHeight = -3;
+    private int tempSpeed = 0;
+    private float timer;
+    float tempSpeedTimer;
 
     private void Awake()
     {
@@ -19,13 +23,31 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         MyEvents.PlayerDied.AddListener(EndGame);
-        MyEvents.SpeedIncreased.AddListener(AddSpeed);
         MyEvents.BlockDoneFalling.AddListener(CheckMaxHeight);
+        timer = 0;
+        tempSpeedTimer = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        timer += Time.deltaTime;
+        //Every 30 seconds add one to speed
+        if (timer >= 20)
+        {
+            AddSpeed();
+            timer -= 30;
+            tempSpeed = 0;
+        }
+        if (playerPos.position.y > maxHeight)
+        {
+            tempSpeedTimer += Time.deltaTime;
+        }
+        if (tempSpeedTimer >= 5)
+        {
+            AddTempSpeed();
+            tempSpeedTimer = 0;
+        }
         //Debug.DrawRay(new Vector3(-2.9f, maxHeight + 1.9f, 0f), Vector3.right * 6f, Color.white);
         //Debug.DrawRay(new Vector3(-2.9f, maxHeight + 1.4f, 0f), Vector3.right * 6f, Color.white);
         //Debug.DrawRay(new Vector3(-2.9f, maxHeight + 0.9f, 0f), Vector3.right * 6f, Color.white);
@@ -40,12 +62,19 @@ public class GameManager : MonoBehaviour
 
     void AddSpeed()
     {
-        gameSpeed++;
+        permSpeed++;
+        Debug.Log("Permanent Speed increased to " + permSpeed);
+    }
+
+    void AddTempSpeed()
+    {
+        tempSpeed++;
+        Debug.Log("Temporary speed increased");
     }
 
     public int getGameSpeed()
     {
-        return gameSpeed;
+        return permSpeed + tempSpeed;
     }
 
     public float getMaxHeight()

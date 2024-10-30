@@ -10,8 +10,6 @@ public static class MyEvents
 
     //Event for player death
     public static UnityEvent PlayerDied = new UnityEvent();
-    //Event for speed being increased
-    public static UnityEvent SpeedIncreased = new UnityEvent();
     //Event for pipe being done falling, so a new pipe can spawn
     public static UnityEvent BlockDoneFalling = new UnityEvent();
     //Event for a pipe being broken
