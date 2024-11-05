@@ -50,31 +50,37 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void EndGame()
+    //End the game
+    private void EndGame()
     {
         SceneManager.LoadScene("Scene1");
     }
 
-    void AddSpeed()
+    //Add a permanent speed increase
+    private void AddSpeed()
     {
         permSpeed++;
     }
 
-    void AddTempSpeed()
+    //Add a temporary speed increase
+    private void AddTempSpeed()
     {
         tempSpeed++;
     }
 
+    //Get the current speed of the game
     public int getGameSpeed()
     {
         return permSpeed + tempSpeed;
     }
 
+    //Get the max height of the blocks
     public float getMaxHeight()
     {
         return maxHeight;
     }
 
+    //Check if a new max height has been reached
     private void CheckMaxHeight()
     {
         RaycastHit2D hit1 = Physics2D.Raycast(new Vector3(-2.9f, maxHeight + 1.9f, 0f), Vector3.right, 5.75f, LayerMask.GetMask("Blocks"));

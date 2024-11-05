@@ -30,7 +30,7 @@ public class Piece : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //If this pipe collided with another pipe, it should stop falling
-        if (collision.gameObject.tag == "Block" && !(collision.transform.IsChildOf(transform)))
+        if ( (collision.gameObject.tag == "Block" || collision.gameObject.tag == "GroundLevel") && !(collision.transform.IsChildOf(transform)))
         {
             isFalling = false;
             MyEvents.BlockDoneFalling.Invoke();
