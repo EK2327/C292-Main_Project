@@ -7,9 +7,8 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI scoreText;
-    [SerializeField] TextMeshProUGUI heightText;
 
-    private UIManager instance;
+    public static UIManager instance;
     private void Awake()
     {
         instance = this;
@@ -20,25 +19,8 @@ public class UIManager : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void setScoreText(int score)
     {
         scoreText.text = "" + score;
-    }
-
-    public void setHeightText(int height)
-    {
-        heightText.text = "" + height;
-    }
-
-    //Start a new game
-    public void RestartTheGame()
-    {
-        SceneManager.LoadScene("Scene0");
     }
 }

@@ -10,10 +10,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform playerPos;
 
     private int permSpeed = 1;
+    private int height;
     private float maxHeight = -3;
     private int tempSpeed = 0;
     private float timer;
-    float tempSpeedTimer;
+    private float tempSpeedTimer;
+    private int score;
+    private int maxScore;
 
     private void Awake()
     {
@@ -26,6 +29,7 @@ public class GameManager : MonoBehaviour
         MyEvents.BlockDoneFalling.AddListener(CheckMaxHeight);
         timer = 0;
         tempSpeedTimer = 0;
+        maxScore = 0;
     }
 
     // Update is called once per frame
@@ -48,11 +52,32 @@ public class GameManager : MonoBehaviour
             AddTempSpeed();
             tempSpeedTimer = 0;
         }
+        //Calculate Score
+        score = 
+            //Height points - 25/block
+            (int)((maxHeight + 3) * 50)
+            //Speed points 50/speed
+            + ((permSpeed + tempSpeed)) * 50 
+            //Time survived points - 100/s
+            + (int)(timer * 100);
+        if (score > maxScore)
+        {
+            maxScore = score;
+        }
+        UIManager.instance.setScoreText(maxScore);
     }
 
     //End the game
     private void EndGame()
     {
+        //Calculate height
+        height = (int)(maxHeight + 3) * 10;
+
+        //Store score and height for main menu scene
+        PlayerPrefs.SetInt("Score", maxScore);
+        PlayerPrefs.SetInt("Height", height);
+
+        //Open main menu scene
         SceneManager.LoadScene("Scene1");
     }
 
