@@ -10,13 +10,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform playerPos;
 
     private int permSpeed = 1;
-    private int height;
     private float maxHeight = -3;
     private int tempSpeed = 0;
-    private float timer;
-    private float tempSpeedTimer;
+    private float timer = 0;
+    private float totalTime = 0;
+    private float tempSpeedTimer = 0;
+    private float scoreUpdateTimer = 0;
+    private int maxScore = 0;
     private int score;
-    private int maxScore;
+    private int height;
 
     private void Awake()
     {
@@ -27,20 +29,18 @@ public class GameManager : MonoBehaviour
     {
         MyEvents.PlayerDied.AddListener(EndGame);
         MyEvents.BlockDoneFalling.AddListener(CheckMaxHeight);
-        timer = 0;
-        tempSpeedTimer = 0;
-        maxScore = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
         timer += Time.deltaTime;
+        totalTime += Time.deltaTime;
         //Every 30 seconds add one to speed
         if (timer >= 20)
         {
             AddSpeed();
-            timer -= 30;
+            timer -= 20;
             tempSpeed = 0;
         }
         if (playerPos.position.y > maxHeight)
@@ -52,26 +52,36 @@ public class GameManager : MonoBehaviour
             AddTempSpeed();
             tempSpeedTimer = 0;
         }
-        //Calculate Score
-        score = 
-            //Height points - 25/block
-            (int)((maxHeight + 3) * 50)
-            //Speed points 50/speed
-            + ((permSpeed + tempSpeed)) * 50 
-            //Time survived points - 100/s
-            + (int)(timer * 100);
-        if (score > maxScore)
+        
+        //Calculate and update score
+        scoreUpdateTimer += Time.deltaTime;
+        if (scoreUpdateTimer >= 0.2)
         {
-            maxScore = score;
+            //Calculate Score
+            score =
+                //Height points : 60/block
+                (int)((maxHeight + 3) * 120)
+                //Speed points : 125/permanent speed + 50/temporary speed
+                + (permSpeed * 125) + (tempSpeed * 50)
+                //Time survived points : 150/s
+                + (int)(totalTime * 150);
+            //Check if score increased
+            if (score > maxScore)
+            {
+                maxScore = score;
+            }
+            //Update UI
+            UIManager.instance.setScoreText(maxScore);
+            scoreUpdateTimer = 0;
         }
-        UIManager.instance.setScoreText(maxScore);
+        
     }
 
     //End the game
     private void EndGame()
     {
         //Calculate height
-        height = (int)(maxHeight + 3) * 10;
+        height = (int)(maxHeight + 3) * 5;
 
         //Store score and height for main menu scene
         PlayerPrefs.SetInt("Score", maxScore);

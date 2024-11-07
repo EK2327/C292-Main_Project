@@ -7,6 +7,7 @@ public class BlockSpawner : MonoBehaviour
     private float yPos;
     float gameSpeed;
     private bool canSpawn = true;
+    private float timeSinceSpawn;
 
     //Pipe prefabs
     [SerializeField] GameObject pipe1prefab;
@@ -40,6 +41,7 @@ public class BlockSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        timeSinceSpawn += Time.deltaTime;
         //Update game speed
         gameSpeed = GameManager.instance.getGameSpeed();
         
@@ -155,8 +157,13 @@ public class BlockSpawner : MonoBehaviour
 
     private void SetCanSpawn()
     {
+        if(timeSinceSpawn >= 0.25)
+        {
+            canSpawn = true;
+            timeSinceSpawn = 0;
+        }
         //Debug.Log("Block can spawn again");
-        canSpawn = true;
+        
     }
 
 }

@@ -18,7 +18,7 @@ public class Water : MonoBehaviour
     void Update()
     {
         gameSpeed = GameManager.instance.getGameSpeed();
-        float calcRiseSpeed = (float)(riseSpeed + ( (riseSpeed * 0.5) * (gameSpeed - 1) ) );
+        float calcRiseSpeed = (float)(riseSpeed + ( (riseSpeed * 0.6) * (gameSpeed - 1) ) );
         maxHeight = GameManager.instance.getMaxHeight();
         if (maxHeight > (transform.position.y + 5))
         {
