@@ -37,9 +37,17 @@ public class MenuUIManager : MonoBehaviour
         heightText.text = "" + height;
     }
 
-    //Start a new game
-    public void RestartTheGame()
+    //Start a new game of 1 player
+    public void Start1Player()
     {
-        SceneManager.LoadScene("Scene0");
+        SceneManager.LoadScene(1);
     }
+
+
+    //Start a new game of 2 player
+    public void Start2Player()
+    {
+        SceneManager.LoadScene(2);
+    }
+
 }

@@ -157,12 +157,11 @@ public class BlockSpawner : MonoBehaviour
 
     private void SetCanSpawn()
     {
-        if(timeSinceSpawn >= 0.25)
+        if(timeSinceSpawn >= 0.1)
         {
             canSpawn = true;
             timeSinceSpawn = 0;
         }
-        //Debug.Log("Block can spawn again");
         
     }
 

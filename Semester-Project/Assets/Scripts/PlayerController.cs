@@ -27,14 +27,14 @@ public class PlayerController : MonoBehaviour
     {
 
         //Movement
-        if (Input.GetAxis("Horizontal") < 0)
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
             
             transform.position += Vector3.left * moveSpeed * Time.deltaTime;
             GetComponent<SpriteRenderer>().sprite = rightSprite;
             isFacingRight = true;
         }
-        else if (Input.GetAxis("Horizontal") > 0)
+        else if (Input.GetKey(KeyCode.RightArrow))
         {
             transform.position += Vector3.right * moveSpeed * Time.deltaTime;
             GetComponent<SpriteRenderer>().sprite = leftSprite;

@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("Height", height);
 
         //Open main menu scene
-        SceneManager.LoadScene("Scene1");
+        SceneManager.LoadScene(0);
     }
 
     //Add a permanent speed increase

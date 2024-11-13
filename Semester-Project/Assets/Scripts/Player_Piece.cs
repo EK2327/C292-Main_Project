@@ -22,20 +22,22 @@ public class Player_Piece : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         //Increment move timer
         moveTimer += Time.deltaTime;
         //If sufficient delay since last move allow for movement
-        if ( moveTimer > moveDelay)
+        if (isFalling && moveTimer > moveDelay)
         {
+            Debug.Log(moveTimer);
             canMove = true;
         }
 
-        if (canMove && Input.GetKey(KeyCode.A))
+        if (isFalling && canMove && Input.GetKeyDown(KeyCode.A))
         {
             moveTimer = 0;
             AttmeptMoveLeft();
         }
-        else if (canMove && Input.GetKey (KeyCode.D))
+        else if (isFalling && canMove && Input.GetKeyDown(KeyCode.D))
         {
             moveTimer = 0;
             AttmeptMoveRight();
@@ -54,13 +56,15 @@ public class Player_Piece : MonoBehaviour
 
     private void AttmeptMoveLeft()
     {
+        Vector3 rayStart = new Vector3(transform.position.x - 0.3f, transform.position.y, transform.position.z);
         bool willMove = true;
         RaycastHit2D hit;
         for (int i = 0; i <= pipeHeight; i++)
         {
-            hit = Physics2D.Raycast(transform.position + new Vector3(0, 0.25f + (0.5f * i), 0), Vector3.left, 0.5f);
+            hit = Physics2D.Raycast(rayStart, Vector3.left, 0.45f);
             if (hit.collider != null)
             {
+                Debug.Log("Hit object with ray cast #" + (i + 1));
                 willMove = false;
             }
         }
@@ -73,23 +77,27 @@ public class Player_Piece : MonoBehaviour
     private void MoveLeft()
     {
         transform.position += new Vector3(-0.5f, 0, 0);
+        canMove = false;
     }
 
     private void AttmeptMoveRight()
     {
+        Vector3 rayStart = new Vector3(transform.position.x - 0.2f + (0.5f * pipeWidth), transform.position.y, transform.position.z);
         bool willMove = true;
         RaycastHit2D hit;
         for (int i = 0; i <= pipeHeight; i++)
         {
-            hit = Physics2D.Raycast(transform.position + new Vector3(pipeWidth / 2, 0.25f + (0.5f * i), 0), Vector3.right, 0.5f);
+            hit = Physics2D.Raycast(rayStart, Vector3.right, 0.45f);
             if (hit.collider != null)
             {
+                Debug.Log("Hit object with ray cast #" + (i + 1));
                 willMove = false;
             }
         }
         if (willMove)
         {
             MoveRight();
+            canMove = false;
         }
     }
 
