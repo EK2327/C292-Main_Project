@@ -32,12 +32,12 @@ public class Player_Piece : MonoBehaviour
             canMove = true;
         }
 
-        if (isFalling && canMove && Input.GetKeyDown(KeyCode.A))
+        if (isFalling && canMove && Input.GetKey(KeyCode.A))
         {
             moveTimer = 0;
             AttmeptMoveLeft();
         }
-        else if (isFalling && canMove && Input.GetKeyDown(KeyCode.D))
+        else if (isFalling && canMove && Input.GetKey(KeyCode.D))
         {
             moveTimer = 0;
             AttmeptMoveRight();
