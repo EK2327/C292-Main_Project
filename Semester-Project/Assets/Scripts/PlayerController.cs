@@ -25,6 +25,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.DrawRay(transform.position + new Vector3(0.14f, 0, 0), Vector3.up * 0.19f, Color.black);
+        Debug.DrawRay(transform.position - new Vector3(0.14f, 0, 0), Vector3.up * 0.19f, Color.black);
+        Debug.DrawRay(transform.position + new Vector3(0.14f, 0, 0), Vector3.down * 0.2f, Color.white);
+        Debug.DrawRay(transform.position - new Vector3(0.14f, 0, 0), Vector3.down * 0.2f, Color.white);
         //Movement
         if (Input.GetKey(KeyCode.LeftArrow))
         {
@@ -70,8 +74,8 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //Check if collider is directly above player
-        RaycastHit2D hit1 = Physics2D.Raycast(transform.position + new Vector3(0.15f, 0, 0), Vector3.up, 0.2f, LayerMask.GetMask("Blocks"));
-        RaycastHit2D hit2 = Physics2D.Raycast(transform.position - new Vector3(0.15f, 0, 0), Vector3.up, 0.2f, LayerMask.GetMask("Blocks"));
+        RaycastHit2D hit1 = Physics2D.Raycast(transform.position + new Vector3(0.14f, 0, 0), Vector3.up, 0.19f, LayerMask.GetMask("Blocks"));
+        RaycastHit2D hit2 = Physics2D.Raycast(transform.position - new Vector3(0.14f, 0, 0), Vector3.up, 0.19f, LayerMask.GetMask("Blocks"));
         if (hit1.collider != null && IsGrounded())
         {
             MyEvents.PlayerDied.Invoke();
@@ -81,8 +85,8 @@ public class PlayerController : MonoBehaviour
     //Return if the player is touching the top of a block
     private bool IsGrounded()
     {
-        RaycastHit2D hit1 = Physics2D.Raycast(transform.position + new Vector3(0.15f, 0, 0), -Vector3.up, 0.2f, LayerMask.GetMask("Blocks"));
-        RaycastHit2D hit2 = Physics2D.Raycast(transform.position - new Vector3(0.15f, 0, 0), -Vector3.up, 0.2f, LayerMask.GetMask("Blocks"));
+        RaycastHit2D hit1 = Physics2D.Raycast(transform.position + new Vector3(0.14f, 0, 0), -Vector3.up, 0.2f, LayerMask.GetMask("Blocks"));
+        RaycastHit2D hit2 = Physics2D.Raycast(transform.position - new Vector3(0.14f, 0, 0), -Vector3.up, 0.2f, LayerMask.GetMask("Blocks"));
 
         if (hit1.collider != null || hit2.collider != null)
         {

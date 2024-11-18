@@ -49,6 +49,7 @@ public class BlockSpawner : MonoBehaviour
         if (canSpawn && timeSinceSpawn >= 0.1)
         {
             timeSinceSpawn = 0;
+            canSpawn = false;
             yPos = GameManager.instance.getMaxHeight() + 10;
             SpawnBlock(Random.Range(0, 9));
         }
@@ -153,7 +154,6 @@ public class BlockSpawner : MonoBehaviour
                 Instantiate(pipe15prefab, spawnPoint, Quaternion.identity);
                 break;
         }
-        canSpawn = false;
     }
 
     private void SetCanSpawn()
