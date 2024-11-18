@@ -33,7 +33,7 @@ public class Block : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         //Check if block is colliding with players swinging hitbox, the proper input is down, and the block can break
-        if (hasLanded && collision.gameObject.tag == "SwingArea" && Input.GetButton("Fire1") && canBreak)
+        if (hasLanded && collision.gameObject.tag == "SwingArea" && Input.GetKey(KeyCode.Space) && canBreak)
         {
             //Destroy this block
             Destroy(gameObject);

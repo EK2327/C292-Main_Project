@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
             isFacingRight = false;
         }
 
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        if (Input.GetKey(KeyCode.UpArrow) && IsGrounded())
         {
                 GetComponent<Rigidbody2D>().AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
             
