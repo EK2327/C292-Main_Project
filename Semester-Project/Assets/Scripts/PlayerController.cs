@@ -25,7 +25,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         //Movement
         if (Input.GetKey(KeyCode.LeftArrow))
         {
@@ -41,10 +40,9 @@ public class PlayerController : MonoBehaviour
             isFacingRight = false;
         }
 
-        if (Input.GetKey(KeyCode.UpArrow) && IsGrounded())
+        if (Input.GetKeyDown(KeyCode.UpArrow) && IsGrounded())
         {
-                GetComponent<Rigidbody2D>().AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
-            
+            GetComponent<Rigidbody2D>().AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
         }
 
         //Position hitBox for hitting blocks
@@ -81,7 +79,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //Return if the player is touching the top of a block
-    bool IsGrounded()
+    private bool IsGrounded()
     {
         RaycastHit2D hit1 = Physics2D.Raycast(transform.position + new Vector3(0.15f, 0, 0), -Vector3.up, 0.2f, LayerMask.GetMask("Blocks"));
         RaycastHit2D hit2 = Physics2D.Raycast(transform.position - new Vector3(0.15f, 0, 0), -Vector3.up, 0.2f, LayerMask.GetMask("Blocks"));

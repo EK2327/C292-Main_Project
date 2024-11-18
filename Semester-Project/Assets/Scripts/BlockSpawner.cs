@@ -46,8 +46,9 @@ public class BlockSpawner : MonoBehaviour
         gameSpeed = GameManager.instance.getGameSpeed();
         
         //Check if the last block has landed and a new block can spawn
-        if (canSpawn)
+        if (canSpawn && timeSinceSpawn >= 0.1)
         {
+            timeSinceSpawn = 0;
             yPos = GameManager.instance.getMaxHeight() + 10;
             SpawnBlock(Random.Range(0, 9));
         }
@@ -157,12 +158,7 @@ public class BlockSpawner : MonoBehaviour
 
     private void SetCanSpawn()
     {
-        if(timeSinceSpawn >= 0.1)
-        {
-            canSpawn = true;
-            timeSinceSpawn = 0;
-        }
-        
+        canSpawn = true;
     }
 
 }

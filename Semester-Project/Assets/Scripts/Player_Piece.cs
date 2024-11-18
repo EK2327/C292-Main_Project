@@ -61,7 +61,7 @@ public class Player_Piece : MonoBehaviour
         RaycastHit2D hit;
         for (int i = 0; i <= pipeHeight; i++)
         {
-            hit = Physics2D.Raycast(rayStart, Vector3.left, 0.45f);
+            hit = Physics2D.Raycast(rayStart, Vector3.left, 0.4f);
             if (hit.collider != null)
             {
                 Debug.Log("Hit object with ray cast #" + (i + 1));
@@ -87,7 +87,7 @@ public class Player_Piece : MonoBehaviour
         RaycastHit2D hit;
         for (int i = 0; i <= pipeHeight; i++)
         {
-            hit = Physics2D.Raycast(rayStart, Vector3.right, 0.45f);
+            hit = Physics2D.Raycast(rayStart, Vector3.right, 0.4f);
             if (hit.collider != null)
             {
                 Debug.Log("Hit object with ray cast #" + (i + 1));
