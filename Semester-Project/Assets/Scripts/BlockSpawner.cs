@@ -30,7 +30,6 @@ public class BlockSpawner : MonoBehaviour
     [SerializeField] GameObject pipe18prefab;
     [SerializeField] GameObject pipe19prefab;
 
-    [SerializeField] GameObject bugBlocker;
 
 
     // Start is called before the first frame update
@@ -52,10 +51,8 @@ public class BlockSpawner : MonoBehaviour
         {
             timeSinceSpawn = 0;
             canSpawn = false;
-            bugBlocker.SetActive(true);
             yPos = GameManager.instance.getMaxHeight() + 10;
             SpawnBlock(Random.Range(0, 9));
-            bugBlocker.SetActive(false);
         }
         
     }

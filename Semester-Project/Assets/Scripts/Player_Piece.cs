@@ -28,7 +28,6 @@ public class Player_Piece : MonoBehaviour
         //If sufficient delay since last move allow for movement
         if (isFalling && moveTimer > moveDelay)
         {
-            Debug.Log(moveTimer);
             canMove = true;
         }
 
@@ -64,7 +63,6 @@ public class Player_Piece : MonoBehaviour
             hit = Physics2D.Raycast(rayStart + new Vector3(0, i * (0.5f), 0), Vector3.left, 0.4f);
             if (hit.collider != null)
             {
-                Debug.Log("Hit object with ray cast #" + (i + 1));
                 willMove = false;
             }
         }
@@ -90,7 +88,6 @@ public class Player_Piece : MonoBehaviour
             hit = Physics2D.Raycast(rayStart + new Vector3(0, i * (0.5f), 0), Vector3.right, 0.4f);
             if (hit.collider != null)
             {
-                Debug.Log("Hit object with ray cast #" + (i + 1));
                 willMove = false;
             }
         }
